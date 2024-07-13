@@ -18,7 +18,7 @@ git clone https://github.com/AfroMonkey/odoo-saas
 
 cd odoo-saas/nginx
 
-docker-compose up -d
+docker compose up -d
 
 cd ../odoo
 
@@ -26,5 +26,5 @@ cp .env-template .env
 
 vim .env
 
-docker-compose up -d
+docker compose up -d
 ```
