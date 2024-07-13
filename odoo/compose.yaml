@@ -1,0 +1,36 @@
+services:
+  odoo:
+    image: odoo:17.0
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    networks:
+      - nginx-proxy
+      - internal
+  db:
+    image: postgres:16.3
+    restart: always
+    environment:
+      POSTGRES_DB: odoo
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - internal
+
+volumes:
+  web-data:
+  db-data:
+
+
+networks:
+  nginx-proxy:
+    external:
+      name: nginx-proxy
+  internal:
+    external: false
